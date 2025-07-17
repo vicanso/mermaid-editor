@@ -1,0 +1,17 @@
+# Git
+.git
+.gitignore
+
+# GitHub Actions
+.github
+
+# Documentation
+README.md
+LICENSE
+
+# Docker
+Dockerfile
+.dockerignore
+
+# 只保留需要的文件
+!static-files/ 

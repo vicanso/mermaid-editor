@@ -14,6 +14,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Extract files from mermaid-live-editor
+        run: |
+          # 拉取镜像（只在 amd64 平台运行）
+          docker pull ghcr.io/mermaid-js/mermaid-live-editor
+          # 创建临时容器并复制文件
+          docker create --name temp-container ghcr.io/mermaid-js/mermaid-live-editor
+          docker cp temp-container:/usr/share/nginx/html ./static-files
+          docker rm temp-container
+          # 验证复制的文件
+          ls -la ./static-files
+          echo "Files extracted successfully:"
+          find ./static-files -type f | head -10
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v4
